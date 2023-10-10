@@ -1,6 +1,5 @@
 from oceano import Oceano
 
-
 class Jogo:
     def __init__(self, nome:str, data_nascimento:str) -> None:
         self.__nome = nome
