@@ -23,5 +23,5 @@ class ControladorJogador:
     def lista_jogadores(self):
         pass
 
-    def busca_jogador(self, usuario, senha):
+    def busca_jogador(self, usuario, senha):  
         pass
