@@ -1,3 +1,3 @@
-class Controlador_jogador:
+class ControladorJogador:
     def __init__(self) -> None:
         pass
