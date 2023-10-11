@@ -1,3 +1,7 @@
+from limite.tela_jogador import TelaJogador
+from entidade.jogador import Jogador
+
+
 class ControladorJogador:
     def __init__(self, nome, data_nascimento):
         self.__jogadores = jogadores
@@ -19,5 +23,5 @@ class ControladorJogador:
     def lista_jogadores(self):
         pass
 
-    def busca_jogador(self, usuario, senha):
+    def busca_jogador(self, usuario, senha):  
         pass
