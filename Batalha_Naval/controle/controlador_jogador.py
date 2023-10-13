@@ -3,16 +3,21 @@ from entidade.jogador import Jogador
 
 
 class ControladorJogador:
-    def __init__(self, nome, data_nascimento):
-        self.__jogadores = jogadores
+    def __init__(self, controlador_sistema):
+        self.__jogadores = []
+        self.__tela_jogador = TelaJogador
         self.__controlador_sistema = controlador_sistema
 
+
+
     def cadastra_jogador(self):
-        pass
+        dados_jogador = self.__tela_jogador.recebe_cadastro()
+        jogador = Jogador(dados_jogador["nome"], dados_jogador["data_nascimento"], dados_jogador["senha"])
+        self.__jogadores.append(jogador)
+
 
     def altera_cadastro(self):
         self.lista_jogadores()
-        
 
     def remove_jogador(self):
         pass
@@ -21,11 +26,12 @@ class ControladorJogador:
         pass
 
     def lista_jogadores(self):
-        pass
+        for jogador in self.__jogadores:
+            pass
 
-<<<<<<< HEAD
-    def busca_jogador(self, usuario, senha):
-=======
-    def busca_jogador(self, usuario, senha):  
->>>>>>> 48d40c96c3353d95fe66bd34682a51e5dfb8981c
-        pass
+    def encontra_cadastro(self, usuario, senha):
+        for jogador in self.__jogadores:
+            if jogador.usuario == usuario and jogador.senha == senha:
+                return jogador
+        return None
+

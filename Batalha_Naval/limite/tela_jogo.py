@@ -8,5 +8,5 @@ class TelaJogo:
     def mostra_pontuacao_jogada():
         pass
 
-    
+
 

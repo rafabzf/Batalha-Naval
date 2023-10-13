@@ -1,5 +1,5 @@
-from jogador import Jogador
-from oceano import Oceano
+from entidade.jogador import Jogador
+from entidade.oceano import Oceano
 
 class Jogo:
     def __init__(self) -> None:
