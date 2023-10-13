@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Embarcao(ABC):
     @abstractmethod
     def __init__(self, tamanho: int, nome: str, posicoes: int):
