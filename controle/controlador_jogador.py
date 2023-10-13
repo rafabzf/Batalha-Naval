@@ -5,8 +5,8 @@ from entidade.jogador import Jogador
 class ControladorJogador:
     def __init__(self, controlador_sistema):
         self.__jogadores = []
-        self.__tela_jogador = TelaJogador
-        self.__controlador_sistema = controlador_sistema
+        self.__tela_jogador = TelaJogador()
+        #self.__controlador_sistema = controlador_sistema
 
 
 
@@ -14,10 +14,11 @@ class ControladorJogador:
         dados_jogador = self.__tela_jogador.recebe_cadastro()
         jogador = Jogador(dados_jogador["nome"], dados_jogador["data_nascimento"], dados_jogador["senha"])
         self.__jogadores.append(jogador)
+        self.__tela_jogador.mostra_mensagem("Cadastro realizado com sucesso!")
 
 
     def altera_cadastro(self):
-        self.lista_jogadores()
+        pass
 
     def remove_jogador(self):
         pass
