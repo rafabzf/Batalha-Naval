@@ -1,5 +1,6 @@
 from embarcacao import Embarcao
 
+
 class PortaAvioes(Embarcao):
     def __init__(self, tamanho: int, nome: str, posicoes: int, num_avioes: int):
         super().__init__(tamanho, nome, posicoes)
