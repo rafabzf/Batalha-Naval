@@ -8,4 +8,4 @@ class TelaOceano:
         pass
     
     def mostra_mensagem(self):
-        pass
+        print("Oceano criado com sucesso!")
