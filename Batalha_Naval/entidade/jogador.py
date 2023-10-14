@@ -1,8 +1,8 @@
 from oceano import Oceano
 
 
-class Jogo:
-    def __init__(self, nome: str, data_nascimento: str) -> None:
+class Jogador:
+    def __init__(self, nome: str, data_nascimento):
         self.__nome = nome
         self.__data_nascimento = data_nascimento
         self.__oceano = Oceano
