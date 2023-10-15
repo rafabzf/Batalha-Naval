@@ -2,7 +2,7 @@ from embarcacao import Embarcao
 
 
 class Submarino(Embarcao):
-    def __init__(self, tamanho: int, nome: str, posicoes: int, profundidade: int):
+    def __init__(self, tamanho: int, nome: str, posicoes: 2, profundidade: int):
         super().__init__(tamanho, nome, posicoes)
         self.__profundidade = profundidade
         

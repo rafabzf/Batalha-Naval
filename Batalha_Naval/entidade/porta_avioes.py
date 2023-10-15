@@ -2,7 +2,7 @@ from embarcacao import Embarcao
 
 
 class PortaAvioes(Embarcao):
-    def __init__(self, tamanho: int, nome: str, posicoes: int, num_avioes: int):
+    def __init__(self, tamanho: int, nome: str, posicoes: 4, num_avioes: int):
         super().__init__(tamanho, nome, posicoes)
         self.__num_avioes = num_avioes
         

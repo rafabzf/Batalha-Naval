@@ -1,6 +1,5 @@
 from embarcacao import Embarcao
 
-
 class Oceano:
     def __init__(self, tamanho_oceano: int, embarcacoes: [Embarcao]):
         self.__tamanho_oceano = tamanho_oceano
