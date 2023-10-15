@@ -15,7 +15,11 @@ class TelaJogador:
         pass
 
     def mostra_ranking(self):
-        pass    
+        pass
+    
+    def mostra_lista_jodares(self):
+        pass
+
  
     def mostra_mensagem(self, msg):
         print(msg)
