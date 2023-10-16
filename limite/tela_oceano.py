@@ -1,5 +1,3 @@
-from controle.controlador_oceano import ControladorOceano
-
 class TelaOceano:
     def recebe_tamanho(self):
         print("-----TAMANHO DO OCEANO-----")

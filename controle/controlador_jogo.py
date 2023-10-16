@@ -1,10 +1,8 @@
 # from entidade.jogo import Jogo
 from limite.tela_jogo import TelaJogo
-from controle.controlador_sistema import ControladorSistema
 
 class ControladorJogo:
     def __init__(self) -> None:
-        self.__controlador_sistema = ControladorSistema()
         self.__tela_jogo = TelaJogo()
 
     def faz_login(self):
@@ -19,5 +17,5 @@ class ControladorJogo:
     def inicia_jogo(self):
         self.__tela_jogo.mostra_mensagem("Jogo iniciado!")
 
-    def reliza_jogada(self):
+    def realiza_jogada(self):
         pass
