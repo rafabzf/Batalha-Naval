@@ -12,7 +12,7 @@ class TelaJogo:
         pass
 
     def mostra_opcoes(self):
-        print("------MENU------")
+        print("------MENU JOGO------")
         print("Selecione a opção desejada")
         print("1 - Iniciar partida")
         print("2 - Ver ranking")

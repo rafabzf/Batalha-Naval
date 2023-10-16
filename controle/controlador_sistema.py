@@ -1,13 +1,13 @@
 from limite.tela_sistema import TelaSistema
 from controle.controlador_jogador import ControladorJogador
 from controle.controlador_jogo import ControladorJogo
-# from controle.controlador_oceano import ControladorOceano
+from controle.controlador_oceano import ControladorOceano
 
 class ControladorSistema:
     def __init__(self) -> None:
         self.__controlador_jogador = ControladorJogador
         self.__controlador_jogo = ControladorJogo
-        # self.__controlador_oceano = ControladorOceano(self)
+        self.__controlador_oceano = ControladorOceano
         self.__tela_sistema = TelaSistema
 
     def inicia_cadastro(self):
@@ -23,6 +23,10 @@ class ControladorSistema:
     @property
     def retorna_controlador_jogador(self):
         return self.__controlador_jogador
+    
+    @property
+    def retorna_controlador_oceano(self):
+        return self.__controlador_oceano
 
 
     def inicializa_sistema(self):
