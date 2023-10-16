@@ -3,16 +3,20 @@ from entidade.jogador import Jogador
 
 
 class ControladorJogador:
-    def __init__(self, nome, data_nascimento):
-        self.__jogadores = jogadores
-        self.__controlador_sistema = controlador_sistema
+    def __init__(self):
+        self.__jogadores = []
+        self.__tela_jogador = TelaJogador()
 
     def cadastra_jogador(self):
-        pass
+        dados_cadastro = self.__tela_jogador.recebe_cadastro()
+        jogador = Jogador(
+            dados_cadastro["nome"], dados_cadastro["data_nascimento"], dados_cadastro["senha"])
+        self.__jogadores.append(jogador)
+        self.__tela_jogador.mostra_mensagem("\nCadastro realizado com sucesso!")
+        self.__tela_jogador.mostra_mensagem("Faça Login para jogar! \n")
 
     def altera_cadastro(self):
-        self.lista_jogadores()
-        
+        pass
 
     def remove_jogador(self):
         pass
@@ -21,7 +25,13 @@ class ControladorJogador:
         pass
 
     def lista_jogadores(self):
-        pass
 
-    def busca_jogador(self, usuario, senha):  
-        pass
+        for jogador in self.__jogadores:
+            self.__tela_jogador.mostra_mensagem({"nome": jogador.nome})
+
+    def estah_cadastrado(self, nome, senha):
+        for jogador in self.__jogadores:
+            if jogador.nome == nome and jogador.senha == senha:
+                return True
+            else:
+                return False

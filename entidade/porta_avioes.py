@@ -1,5 +1,4 @@
-from embarcacao import Embarcao
-
+from entidade.embarcacao import Embarcao
 
 class PortaAvioes(Embarcao):
     def __init__(self, tamanho: int, nome: str, posicoes: int, num_avioes: int):

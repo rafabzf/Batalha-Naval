@@ -1,4 +1,4 @@
-from embarcacao import Embarcao
+from entendidade.embarcacao import Embarcao
 
 
 class Oceano:
@@ -13,3 +13,4 @@ class Oceano:
     def adiciona_embarcacao(self, tamanho: int, nome: str, posicoes: int):
         nova_embarcacao = Embarcao(tamanho, nome, posicoes)
         self.__embarcacoes.append(nova_embarcacao)
+        

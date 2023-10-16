@@ -1,4 +1,4 @@
-from embarcacao import Embarcao
+from entidade.embarcacao import Embarcao
 
 
 class Submarino(Embarcao):

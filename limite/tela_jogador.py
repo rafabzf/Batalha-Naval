@@ -1,9 +1,10 @@
 class TelaJogador:
-    def __init__(self) -> None:
-        pass
-
     def recebe_cadastro(self):
-        pass
+        print("------CADASTRO------")
+        nome = input("Digite seu nome: ")
+        data_nacimento = input("Digite sua data de nascimento: ")
+        senha = input("Digite sua data de senha: ")
+        return{"nome": nome, "data_nascimento": data_nacimento, "senha": senha}
 
     def mostra_historico(self):
         pass
@@ -12,6 +13,10 @@ class TelaJogador:
         pass
 
     def mostra_ranking(self):
-        pass    
+        pass
     
-    
+    def mostra_lista_jodares(self):
+        pass
+ 
+    def mostra_mensagem(self, msg):
+        print(msg)
