@@ -5,7 +5,6 @@ from entidade.jogador import Jogador
 class ControladorJogador:
     def __init__(self):
         self.__jogadores = []
-        #self.__ranking = []
         self.__tela_jogador = TelaJogador()
 
     def cadastra_jogador(self):
