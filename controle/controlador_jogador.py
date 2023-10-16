@@ -25,7 +25,6 @@ class ControladorJogador:
         pass
 
     def ordena_ranking(self):
-        #Use o método `sort` para ordenar com base na pontuação e, em seguida, no nome.
         self.lista_jogadores.sort(key=lambda jogador: (jogador.pontuacao, jogador.nome))
 
     def lista_jogadores(self):
