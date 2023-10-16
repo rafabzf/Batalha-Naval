@@ -10,6 +10,18 @@ class ControladorSistema:
         # self.__controlador_oceano = ControladorOceano(self)
         self.__tela_sistema = TelaSistema
 
+    @property
+    def controlador_jogador(self) -> ControladorJogador:
+        return self.__controlador_jogador
+    
+    @property
+    def controlador_jogo(self) -> ControladorJogo:
+        return self.__controlador_jogo
+    
+    @property
+    def controlador_oceano(self) -> ControladorOceano:
+        return self.__controlador_oceano
+    
     def inicia_cadastro(self):
         self.__controlador_jogador().cadastra_jogador()
         self.abre_opcoes()
