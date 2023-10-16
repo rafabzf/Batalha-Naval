@@ -41,5 +41,5 @@ class ControladorJogo:
 
 
 
-    def reliza_jogada(self):
+    def realiza_jogada(self):
         pass
