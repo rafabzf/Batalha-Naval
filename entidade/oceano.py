@@ -1,4 +1,4 @@
-from entendidade.embarcacao import Embarcao
+from entidade.embarcacao import Embarcao
 
 
 class Oceano:
