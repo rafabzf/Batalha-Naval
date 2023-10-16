@@ -1,11 +1,11 @@
 #from entidade.oceano import Oceano
 
 class Jogador:
-    def __init__(self, nome: str, data_nascimento, senha):
+    def __init__(self, nome: str, data_nascimento, senha, pontuacao=0):
         self.__nome = nome
         self.__data_nascimento = data_nascimento
         #self.__oceano = Oceano
-        #self.__pontuacao = pontuacao
+        self.__pontuacao = pontuacao
         self.__senha = senha
         self.historico = []
 

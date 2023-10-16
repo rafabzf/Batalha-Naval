@@ -11,5 +11,15 @@ class TelaJogo:
     def mostra_pontuacao_jogada(self):
         pass
 
+    def mostra_opcoes(self):
+        print("------MENU------")
+        print("Selecione a opção desejada")
+        print("1 - Iniciar partida")
+        print("2 - Ver ranking")
+        print("0 - Voltar")
+        opcao = int(input("Escolha a opção: "))
+        return opcao
+
+
     def mostra_mensagem(self, msg):
         print(msg)
