@@ -15,7 +15,7 @@ class TelaJogador:
     def mostra_ranking(self):
         pass
     
-    def mostra_lista_jodares(self):
+    def mostra_lista_jogadores(self):
         pass
  
     def mostra_mensagem(self, msg):

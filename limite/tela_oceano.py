@@ -1,12 +1,12 @@
 class TelaOceano:
-    '''def mostra_opcoes(self):
+    def mostra_opcoes(self):
         print("------Tela Oceano------")
         print("Selecione a opção desejada")
-        print("1 - Fazer Login")
-        print("2 - Fazer Cadastro")
-        print("0 - Encerrar o sistema")
+        print("1 - Criar Oceano Jogador")
+        print("2 - Criar Oceano Computador")
+        print("3 - Adicionar embarcação")
         opcao = int(input("Escolha a opção: "))
-        return opcao'''
+        return opcao
     
     def recebe_tamanho(self):
         print("-----TAMANHO DO OCEANO-----")
