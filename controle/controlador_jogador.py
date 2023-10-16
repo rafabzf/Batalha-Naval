@@ -4,8 +4,8 @@ from entidade.jogador import Jogador
 
 class ControladorJogador:
     def __init__(self):
-        self.__jogadores = []
         self.__tela_jogador = TelaJogador()
+        self.__jogadores = []
 
     def cadastra_jogador(self):
         dados_cadastro = self.__tela_jogador.recebe_cadastro()
@@ -32,12 +32,13 @@ class ControladorJogador:
 
         for jogador in self.__jogadores:
             self.__tela_jogador.mostra_mensagem({"nome": jogador.nome})
+    
 
-    def estah_cadastrado(self, nome, senha):
-        try:
-            for jogador in self.__jogadores:
-                if jogador.nome == nome and jogador.senha == senha:
-                    return True
-            return False
-        except: 
-            self.__tela_jogador.mostra_mensagem("Falha ao verificar login")
+    def estah_cadastrado(self, nome, senha):          
+        for jogador in self.__jogadores:
+            print(jogador)
+            if jogador.nome == nome and jogador.senha == senha:
+                return True
+                
+    
+    
