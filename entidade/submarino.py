@@ -1,5 +1,6 @@
 from entidade.embarcacao import Embarcao
 
+
 class Submarino(Embarcao):
     def __init__(self, tamanho: int, nome: str, posicoes: int, profundidade: int):
         super().__init__(tamanho, nome, posicoes)

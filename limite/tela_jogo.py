@@ -1,5 +1,4 @@
 class TelaJogo:
-
     def recebe_login(self):
         print("------LOGIN-------")
         recebe_nome = input("Digite seu nome: ")

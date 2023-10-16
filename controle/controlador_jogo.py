@@ -2,7 +2,6 @@
 from limite.tela_jogo import TelaJogo
 from controle.controlador_sistema import ControladorSistema
 
-
 class ControladorJogo:
     def __init__(self) -> None:
         self.__controlador_sistema = ControladorSistema()

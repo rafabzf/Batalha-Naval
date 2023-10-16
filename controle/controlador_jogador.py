@@ -25,6 +25,7 @@ class ControladorJogador:
         pass
 
     def lista_jogadores(self):
+
         for jogador in self.__jogadores:
             self.__tela_jogador.mostra_mensagem({"nome": jogador.nome})
 

@@ -1,6 +1,5 @@
 #from entidade.oceano import Oceano
 
-
 class Jogador:
     def __init__(self, nome: str, data_nascimento, senha):
         self.__nome = nome

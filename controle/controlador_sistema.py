@@ -4,6 +4,7 @@ from controle.controlador_jogo import ControladorJogo
 #from controle.controlador_oceano import ControladorOceano
 
 
+
 class ControladorSistema:
     def __init__(self) -> None:
         self.__controlador_jogador = ControladorJogador()
