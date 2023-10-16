@@ -5,15 +5,11 @@ class TelaEmbarcacao:
        embarcacoes = Oceano.embarcacoes()
        return embarcacoes 
     
-    def recebe_posicao_x_embarcacao(self):
-        print("Informe a linha para inserir o barco: ")
+    def recebe_posicao_embarcacao(self):
+        print("Informe a posição para inserir o barco: ")
         linha = int(input("Linha: "))
-        return linha
-        
-    def recebe_posicao_y_embarcacao(self):
-        print("Informe a coluna para inserir o barco: ")
         coluna = input("Coluna: ").upper()
-        return coluna
+        return linha, coluna
         
         '''
         print("Qual embarcação você deseja posicionar?")
