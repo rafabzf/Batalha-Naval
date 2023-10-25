@@ -5,26 +5,30 @@ from controle.controlador_oceano import ControladorOceano
 
 class ControladorSistema:
     def __init__(self) -> None:
-        self.__controlador_jogador = ControladorJogador
-        self.__controlador_jogo = ControladorJogo
-        self.__controlador_oceano = ControladorOceano
-        self.__tela_sistema = TelaSistema
+        self.__controlador_jogador = ControladorJogador(self)
+        self.__controlador_jogo = ControladorJogo(self)
+        self.__controlador_oceano = ControladorOceano(self)
+        self.__tela_sistema = TelaSistema()
 
     def inicia_cadastro(self):
-        self.__controlador_jogador().cadastra_jogador()
+        self.__controlador_jogador.cadastra_jogador()
         self.abre_opcoes()
 
     def inicia_login(self):
-        self.__controlador_jogo().faz_login()
+        self.__controlador_jogo.faz_login()
 
     def ordena_ranking(self):
         pass
     
-    @property
-    def retorna_controlador_jogador(self):
-        return self.__controlador_jogador
     
-    @property
+    def retorna_lista_jogadores(self):
+        return self.__controlador_jogador.lista_jogadores()
+    
+    
+    def retorna_estah_cadastrado(self, recebe_nome, recebe_senha):
+        return self.__controlador_jogador.estah_cadastrado(recebe_nome, recebe_senha)
+    
+    
     def retorna_controlador_oceano(self):
         return self.__controlador_oceano
 
@@ -36,7 +40,7 @@ class ControladorSistema:
         lista_opcoes = {1: self.inicia_login, 
                         2: self.inicia_cadastro,
                         0: self.encerra_sistema}
-        opcao_selecionada = self.__tela_sistema().mostra_opcoes()
+        opcao_selecionada = self.__tela_sistema.mostra_opcoes()
         funcao_escolhida = lista_opcoes[opcao_selecionada]
         funcao_escolhida()
 

@@ -2,9 +2,10 @@ from limite.tela_embarcacao import TelaEmbarcacao
 from limite.tela_oceano import TelaOceano
 
 class ControladorOceano:
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__tela_embarcacao = TelaEmbarcacao()
         self.__tela_oceano = TelaOceano()
+        self.__controlador_sistema = controlador_sistema
     
     def cria_oceano(self):
         tamanho_oceano = self.__tela_oceano.recebe_tamanho()
