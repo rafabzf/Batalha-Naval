@@ -43,6 +43,11 @@ class ControladorJogo:
     def mostra_ranking(self):
         self.__controlador_sistema.retorna_lista_jogadores()
         
+        if self.__tela_jogo.voltar() == "S":
+            self.abre_opcoes()
+        else:
+            self.__controlador_sistema.encerra_sistema()
+        
 
     def realiza_jogada(self):
         pass
