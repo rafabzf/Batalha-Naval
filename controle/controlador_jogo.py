@@ -13,8 +13,14 @@ class ControladorJogo:
         if self.__controlador_sistema.retorna_estah_cadastrado(recebe_nome, recebe_senha):
             self.inicia_jogo()
         else:
+            
             self.__tela_jogo.mostra_mensagem("Jogador não encontrado!")
-            self.faz_login()
+            if self.__tela_jogo.voltar() == "S":
+                self.__controlador_sistema.abre_opcoes()
+            else:
+                self.faz_login()
+            
+                
         
 
 
@@ -35,9 +41,7 @@ class ControladorJogo:
 
     def inicia_partida(self):
         self.__tela_jogo.mostra_mensagem("Partida iniciada!")
-        self.__controlador_sistema.retorna_controlador_oceano()
-        self.__controlador_sistema.retorna_controlador_oceano().cria_oceano_computador()
-
+        self.__controlador_sistema.retorna_armazena_tamanho_oceano()
      
 
     def mostra_ranking(self):
