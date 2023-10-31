@@ -23,3 +23,7 @@ class TelaJogo:
 
     def mostra_mensagem(self, msg):
         print(msg)
+
+    def voltar(self):
+        opcao = input("Deseja voltar? [S/N]").upper()
+        return opcao
