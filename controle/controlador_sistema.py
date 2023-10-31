@@ -2,6 +2,7 @@ from limite.tela_sistema import TelaSistema
 from controle.controlador_jogador import ControladorJogador
 from controle.controlador_jogo import ControladorJogo
 from controle.controlador_oceano import ControladorOceano
+from controle.controlador_execessao import Controlador_excessao
 
 class ControladorSistema:
     def __init__(self) -> None:
@@ -9,6 +10,7 @@ class ControladorSistema:
         self.__controlador_jogo = ControladorJogo(self)
         self.__controlador_oceano = ControladorOceano(self)
         self.__tela_sistema = TelaSistema()
+        self.__controlador_excessao = Controlador_excessao()
 
     def inicia_cadastro(self):
         self.__controlador_jogador.cadastra_jogador()
@@ -29,20 +31,25 @@ class ControladorSistema:
         return self.__controlador_jogador.estah_cadastrado(recebe_nome, recebe_senha)
     
     
-    def retorna_controlador_oceano(self):
-        return self.__controlador_oceano
+    def retorna_armazena_tamanho_oceano(self):
+        return self.__controlador_oceano.armazena_tamanho_oceano()
 
 
     def inicializa_sistema(self):
         self.abre_opcoes()
 
     def abre_opcoes(self):
-        lista_opcoes = {1: self.inicia_login, 
-                        2: self.inicia_cadastro,
-                        0: self.encerra_sistema}
-        opcao_selecionada = self.__tela_sistema.mostra_opcoes()
-        funcao_escolhida = lista_opcoes[opcao_selecionada]
-        funcao_escolhida()
+        try: 
+            lista_opcoes = {1: self.inicia_login, 
+                            2: self.inicia_cadastro,
+                            0: self.encerra_sistema}
+            opcao_selecionada = self.__tela_sistema.mostra_opcoes()
+            funcao_escolhida = lista_opcoes[opcao_selecionada]
+            funcao_escolhida()
+        except Exception as e:
+            mensagem = "Digite um número entre 0-2, coforme a opção desejada"
+            self.__controlador_excessao.handle_value_error(e, mensagem)
+            self.abre_opcoes()
 
     def encerra_sistema(self):
         exit(0)
