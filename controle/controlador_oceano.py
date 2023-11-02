@@ -27,18 +27,6 @@ class ControladorOceano:
         for i in range(tamanho_oceano):
             linha = [str(i + 1)] + oceano[i]
             print(" ".join(linha))
-
-        self.__controlador_sistema = controlador_sistema
-        self.__tamanho_oceano = None
-    
-    
-    def armazena_tamanho_oceano(self):
-        self.__tamanho_oceano = self.__tela_oceano.recebe_tamanho()
-
-
-    def cria_oceano(self):
-        oceano = [['O' for _ in range(self.__tamanho_oceano)] for _ in range(self.__tamanho_oceano)]
-        return oceano
     
     def cria_oceano_computador(self):
         tamanho_oceano = self.__tela_oceano.recebe_tamanho()
