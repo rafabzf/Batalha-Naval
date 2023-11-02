@@ -2,7 +2,7 @@ from limite.tela_embarcacao import TelaEmbarcacao
 from limite.tela_oceano import TelaOceano
 
 class ControladorOceano:
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__tela_embarcacao = TelaEmbarcacao()
         self.__tela_oceano = TelaOceano()
         
@@ -28,6 +28,18 @@ class ControladorOceano:
             linha = [str(i + 1)] + oceano[i]
             print(" ".join(linha))
 
+        self.__controlador_sistema = controlador_sistema
+        self.__tamanho_oceano = None
+    
+    
+    def armazena_tamanho_oceano(self):
+        self.__tamanho_oceano = self.__tela_oceano.recebe_tamanho()
+
+
+    def cria_oceano(self):
+        oceano = [['O' for _ in range(self.__tamanho_oceano)] for _ in range(self.__tamanho_oceano)]
+        return oceano
+    
     def cria_oceano_computador(self):
         tamanho_oceano = self.__tela_oceano.recebe_tamanho()
         oceano = [['O' for _ in range(tamanho_oceano)] for _ in range(tamanho_oceano)]
