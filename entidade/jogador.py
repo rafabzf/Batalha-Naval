@@ -4,7 +4,7 @@ class Jogador:
     def __init__(self, nome: str, data_nascimento, senha):
         self.__nome = nome
         self.__data_nascimento = data_nascimento
-        self.__oceano = Oceano
+        self.__oceano = Oceano()
         #self.__pontuacao = pontuacao
         self.__senha = senha
         self.historico = []
