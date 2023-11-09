@@ -22,10 +22,6 @@ class ControladorJogo:
                 self.__controlador_sistema.abre_opcoes()
             else:
                 self.faz_login()
-            
-                
-        
-
 
     def inicia_jogo(self):
         self.abre_opcoes()
@@ -46,12 +42,9 @@ class ControladorJogo:
         self.__tela_jogo.mostra_mensagem("Partida iniciada!")
         self.__controlador_sistema.retorna_armazena_tamanho_oceano()
 
-
-
-
     def mostra_ranking(self):
         self.__controlador_sistema.retorna_lista_jogadores()
-        
+
         if self.__tela_jogo.voltar() == "S":
             self.abre_opcoes()
         else:
@@ -62,8 +55,6 @@ class ControladorJogo:
         acertou = False
         if acertou == True:
             self.__pontuacao_partida_jogador += 1
-
-
 
     def partida(self):
         pass

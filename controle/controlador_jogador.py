@@ -1,6 +1,6 @@
 from limite.tela_jogador import TelaJogador
 from entidade.jogador import Jogador
-from controle.controlador_execessao import Controlador_excessao
+from controle.controlador_excessao import ControladorExcessao
 import datetime
 
 
@@ -8,7 +8,7 @@ class ControladorJogador:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__tela_jogador = TelaJogador()
-        self.__controlador_execessao = Controlador_excessao()
+        self.__controlador_execessao = ControladorExcessao()
         self.__jogadores = []
 
     def cadastra_jogador(self):

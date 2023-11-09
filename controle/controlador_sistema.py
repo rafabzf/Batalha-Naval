@@ -2,7 +2,7 @@ from limite.tela_sistema import TelaSistema
 from controle.controlador_jogador import ControladorJogador
 from controle.controlador_jogo import ControladorJogo
 from controle.controlador_oceano import ControladorOceano
-from controle.controlador_execessao import Controlador_excessao
+from controle.controlador_excessao import ControladorExcessao
 
 class ControladorSistema:
     def __init__(self) -> None:
@@ -10,7 +10,7 @@ class ControladorSistema:
         self.__controlador_jogo = ControladorJogo(self)
         self.__controlador_oceano = ControladorOceano(self)
         self.__tela_sistema = TelaSistema()
-        self.__controlador_excessao = Controlador_excessao()
+        self.__controlador_excessao = ControladorExcessao()
 
     @property
     def controlador_jogador(self) -> ControladorJogador:
