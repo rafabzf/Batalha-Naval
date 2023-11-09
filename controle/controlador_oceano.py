@@ -3,6 +3,7 @@ from limite.tela_oceano import TelaOceano
 
 class ControladorOceano:
     def __init__(self, controlador_sistema):
+        self.__controlador_sistema = controlador_sistema
         self.__tela_embarcacao = TelaEmbarcacao()
         self.__tela_oceano = TelaOceano()
     
