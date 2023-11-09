@@ -12,6 +12,18 @@ class ControladorSistema:
         self.__tela_sistema = TelaSistema()
         self.__controlador_excessao = Controlador_excessao()
 
+    @property
+    def controlador_jogador(self) -> ControladorJogador:
+        return self.__controlador_jogador
+    
+    @property
+    def controlador_jogo(self) -> ControladorJogo:
+        return self.__controlador_jogo
+    
+    @property
+    def controlador_oceano(self) -> ControladorOceano:
+        return self.__controlador_oceano
+    
     def inicia_cadastro(self):
         self.__controlador_jogador.cadastra_jogador()
         self.abre_opcoes()
@@ -32,7 +44,7 @@ class ControladorSistema:
     
     
     def retorna_armazena_tamanho_oceano(self):
-        return self.__controlador_oceano.armazena_tamanho_oceano()
+        return self.__controlador_oceano.cria_tabuleiro()
 
 
     def inicializa_sistema(self):

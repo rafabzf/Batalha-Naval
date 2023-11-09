@@ -45,7 +45,9 @@ class ControladorJogo:
     def inicia_partida(self):
         self.__tela_jogo.mostra_mensagem("Partida iniciada!")
         self.__controlador_sistema.retorna_armazena_tamanho_oceano()
-     
+        self.__
+
+
 
     def mostra_ranking(self):
         self.__controlador_sistema.retorna_lista_jogadores()
@@ -57,8 +59,15 @@ class ControladorJogo:
         
 
     def realiza_jogada(self):
+        acertou = False
+        if acertou == True:
+            self.__pontuacao_partida_jogador += 1
+
+
+
+    def partida(self):
         pass
-
-
+      
+ 
     def partida(self):
         pass

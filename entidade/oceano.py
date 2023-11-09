@@ -1,8 +1,7 @@
-from entidade.embarcacao import Embarcao
-
+from entidade.embarcacao import Embarcacao
 
 class Oceano:
-    def __init__(self, tamanho_oceano: int, embarcacoes: [Embarcao]):
+    def __init__(self, tamanho_oceano: int, embarcacoes: [Embarcacao]):
         self.__tamanho_oceano = tamanho_oceano
         self.__embarcacoes = embarcacoes
 
@@ -17,10 +16,8 @@ class Oceano:
 
         
     def embarcacoes(self):
-        self.__embarcacoes = []
         return self.__embarcacoes
     
-    def adiciona_embarcacao(self, tamanho: int, nome: str, posicoes: int):
-        nova_embarcacao = Embarcao(tamanho, nome, posicoes)
-        self.__embarcacoes.append(nova_embarcacao)
+    def adiciona_embarcacao(self, embarcacao: Embarcacao):
+        self.__embarcacoes.append(embarcacao)
         
