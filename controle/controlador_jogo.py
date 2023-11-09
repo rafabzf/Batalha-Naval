@@ -8,7 +8,7 @@ class ControladorJogo:
         self.__tela_jogo = TelaJogo()
         self.__pontuacao_partida_jogador = 0
         self.__pontuacao_partida_computador = 0
-        self.__pontuacao_total_computador = 0
+        pontuacao_total_computador = 0
 
     def faz_login(self):
         dados_login = self.__tela_jogo.recebe_login()
@@ -67,7 +67,21 @@ class ControladorJogo:
 
     def partida(self):
         pass
-      
- 
-    def partida(self):
-        pass
+         
+        """
+        1. Cria o oceano
+        2. Adiciona as Embarcacões no oceano
+            Seleciona Embarcação
+
+
+        Loop:
+            3. Faz a jogada
+                a. seleciona o local do tiro
+                    Se acertar:
+                        Adiciona na pontuacao 
+                        Muda a regiao para o X
+                    
+        4. Finaliza o jogo
+
+            
+        """
