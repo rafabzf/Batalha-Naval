@@ -45,7 +45,7 @@ class ControladorJogo:
     def inicia_partida(self):
         self.__tela_jogo.mostra_mensagem("Partida iniciada!")
         self.__controlador_sistema.retorna_armazena_tamanho_oceano()
-        self.__
+
 
 
 
