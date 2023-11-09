@@ -1,6 +1,6 @@
-from entidade.embarcacao import Embarcao
+from entidade.embarcacao import Embarcacao
 
-class Bote(Embarcao):
+class Bote(Embarcacao):
     def __init__(self, tamanho: int, nome: str, posicoes: int, num_coletes: int):
         super().__init__(tamanho, nome, posicoes)
         self.__num_coletes = num_coletes
