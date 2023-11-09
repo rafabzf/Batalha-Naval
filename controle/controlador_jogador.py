@@ -32,11 +32,28 @@ class ControladorJogador:
         self.__tela_jogador.mostra_mensagem("\nCadastro realizado com sucesso!")
         self.__tela_jogador.mostra_mensagem("Faça Login para jogar! \n")
         
+    def pega_jogador_por_nome_e_senha(self, nome: str, senha: str):
+        for player in self.__jogadores:
+            if player.nome == nome and player.senha == senha:
+                return player
+        return None
+
     def altera_cadastro(self):
         pass
 
     def remove_jogador(self):
-        pass
+        self.lista_jogadores()
+        dados = self.__tela_jogador.seleciona_jogador()
+        jogador = self.pega_jogador_por_nome_e_senha(dados["nome"], dados["senha"])
+        
+        if jogador is not None:
+            self.__jogadores.remove(jogador)
+            self.__tela_jogador.mostra_mensagem("Jogador removido!")
+            self.lista_jogadores()
+            self.__controlador_sistema.abre_opcoes()
+        else:
+            self.__tela_jogador.mostra_mensagem("Jogador não encontrado!")
+            self.__controlador_sistema.abre_opcoes()
 
     def ordena_ranking(self):
         self.lista_jogadores.sort(key=lambda jogador: (
