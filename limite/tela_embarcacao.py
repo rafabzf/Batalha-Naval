@@ -34,3 +34,6 @@ class TelaEmbarcacao:
         else:
             print("Opção inválida!")
         '''
+    
+    def mostra_embarcacoes_disponiveis(self, embarcacoes):
+        pass
