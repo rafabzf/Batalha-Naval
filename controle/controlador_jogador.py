@@ -1,6 +1,6 @@
 from limite.tela_jogador import TelaJogador
 from entidade.jogador import Jogador
-from controle.controlador_execessao import Controlador_excessao
+from controle.controlador_excessao import ControladorExcessao
 import datetime
 
 
@@ -8,7 +8,7 @@ class ControladorJogador:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__tela_jogador = TelaJogador()
-        self.__controlador_execessao = Controlador_excessao()
+        self.__controlador_execessao = ControladorExcessao()
         self.__jogadores = []
 
     def cadastra_jogador(self):
@@ -32,11 +32,28 @@ class ControladorJogador:
         self.__tela_jogador.mostra_mensagem("\nCadastro realizado com sucesso!")
         self.__tela_jogador.mostra_mensagem("Faça Login para jogar! \n")
         
+    def pega_jogador_por_nome_e_senha(self, nome: str, senha: str):
+        for player in self.__jogadores:
+            if player.nome == nome and player.senha == senha:
+                return player
+        return None
+
     def altera_cadastro(self):
         pass
 
     def remove_jogador(self):
-        pass
+        self.lista_jogadores()
+        dados = self.__tela_jogador.seleciona_jogador()
+        jogador = self.pega_jogador_por_nome_e_senha(dados["nome"], dados["senha"])
+        
+        if jogador is not None:
+            self.__jogadores.remove(jogador)
+            self.__tela_jogador.mostra_mensagem("Jogador removido!")
+            self.lista_jogadores()
+            self.__controlador_sistema.abre_opcoes()
+        else:
+            self.__tela_jogador.mostra_mensagem("Jogador não encontrado!")
+            self.__controlador_sistema.abre_opcoes()
 
     def ordena_ranking(self):
         self.lista_jogadores.sort(key=lambda jogador: (

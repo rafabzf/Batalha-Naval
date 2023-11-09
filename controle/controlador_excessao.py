@@ -1,10 +1,9 @@
-class Controlador_excessao:
+class ControladorExcessao:
     def handle_exception(self, exception):
         try:
             # Tratamento específico para diferentes tipos de exceções
             if isinstance(exception, ValueError):
                 self.handle_value_error(exception)
-
             else:
                 self.handle_generic_exception(exception)
         except Exception as e:
