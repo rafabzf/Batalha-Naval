@@ -6,6 +6,9 @@ class ControladorJogo:
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
         self.__tela_jogo = TelaJogo()
+        self.__pontuacao_partida_jogador = 0
+        self.__pontuacao_partida_computador = 0
+        pontuacao_total_computador = 0
 
     def faz_login(self):
         dados_login = self.__tela_jogo.recebe_login()
@@ -42,7 +45,9 @@ class ControladorJogo:
     def inicia_partida(self):
         self.__tela_jogo.mostra_mensagem("Partida iniciada!")
         self.__controlador_sistema.retorna_armazena_tamanho_oceano()
-     
+        self.__
+
+
 
     def mostra_ranking(self):
         self.__controlador_sistema.retorna_lista_jogadores()
@@ -54,4 +59,29 @@ class ControladorJogo:
         
 
     def realiza_jogada(self):
+        acertou = False
+        if acertou == True:
+            self.__pontuacao_partida_jogador += 1
+
+
+
+    def partida(self):
         pass
+         
+        """
+        1. Cria o oceano
+        2. Adiciona as Embarcacões no oceano
+            Seleciona Embarcação
+
+
+        Loop:
+            3. Faz a jogada
+                a. seleciona o local do tiro
+                    Se acertar:
+                        Adiciona na pontuacao 
+                        Muda a regiao para o X
+                    
+        4. Finaliza o jogo
+
+            
+        """

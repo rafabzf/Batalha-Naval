@@ -44,7 +44,7 @@ class ControladorSistema:
     
     
     def retorna_armazena_tamanho_oceano(self):
-        return self.__controlador_oceano.armazena_tamanho_oceano()
+        return self.__controlador_oceano.cria_tabuleiro()
 
 
     def inicializa_sistema(self):
