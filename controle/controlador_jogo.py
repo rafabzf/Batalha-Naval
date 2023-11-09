@@ -6,6 +6,9 @@ class ControladorJogo:
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
         self.__tela_jogo = TelaJogo()
+        self.__pontuacao_partida_jogador = 0
+        self.__pontuacao_partida_computador = 0
+        self.__pontuacao_total_computador = 0
 
     def faz_login(self):
         dados_login = self.__tela_jogo.recebe_login()
@@ -54,4 +57,8 @@ class ControladorJogo:
         
 
     def realiza_jogada(self):
+        pass
+
+
+    def partida(self):
         pass
