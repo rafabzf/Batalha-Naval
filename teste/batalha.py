@@ -55,7 +55,7 @@ class Jogo:
         while True:
             try:
                 coordenada = self.recebe_coordenada(msg)
-                if len(coordenada) < 1 or not coordenada[1:].isdigit():
+                if len(coordenada) < 2 or not coordenada[1:].isdigit() or not coordenada[0].isalpha():
                     raise ValueError("Digite uma coordenada válida")
                 linha = int(coordenada[1:])
                 coluna = self.mapear_letra_numero(coordenada[0])
