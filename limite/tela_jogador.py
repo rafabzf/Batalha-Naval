@@ -11,6 +11,13 @@ class TelaJogador:
         nome = input("Digite o nome do Jogador: ")
         senha = input("Digite a senha: ")
         return {"nome": nome, "senha": senha}
+    
+    def pega_dados_jogador(self):
+        print("----------- INSIRA OS SEGUINTES DADOS ------------")
+        nome = input("Nome do Player: ")
+        nascimento = input("Data de nascimento do player (##/##/####): ")
+        senha = input("Senha: ")
+        return {"nome": nome, "nascimento" : nascimento, "senha": senha}
 
     def mostra_historico(self):
         pass

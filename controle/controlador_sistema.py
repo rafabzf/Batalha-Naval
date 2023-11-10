@@ -30,6 +30,9 @@ class ControladorSistema:
         
     def remove_cadastro(self):
         self.__controlador_jogador.remove_jogador()
+        
+    def altera_cadastro(self):
+        self.controlador_jogador.altera_cadastro()
 
     def inicia_login(self):
         self.__controlador_jogo.faz_login()
@@ -57,12 +60,13 @@ class ControladorSistema:
             lista_opcoes = {1: self.inicia_login, 
                             2: self.inicia_cadastro,
                             3: self.remove_cadastro,
+                            4: self.altera_cadastro,
                             0: self.encerra_sistema}
             opcao_selecionada = self.__tela_sistema.mostra_opcoes()
             funcao_escolhida = lista_opcoes[opcao_selecionada]
             funcao_escolhida()
         except Exception as e:
-            mensagem = "Digite um número entre 0-3, coforme a opção desejada"
+            mensagem = "Digite um número entre 0-4, coforme a opção desejada"
             self.__controlador_excessao.handle_value_error(e, mensagem)
             self.abre_opcoes()
 
