@@ -1,8 +1,8 @@
 from entidade.embarcacao import Embarcacao
 
 class PortaAvioes(Embarcacao):
-    def __init__(self, tamanho: int, nome: str, posicoes: int, num_avioes: int):
-        super().__init__(tamanho, nome, posicoes)
+    def __init__(self, num_avioes: int):
+        super().__init__("Porta-Aviões", "P", 4, 1)
         self.__num_avioes = num_avioes
         
     @property
