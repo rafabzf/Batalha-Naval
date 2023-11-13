@@ -176,10 +176,11 @@ class ControladorJogo:
     
     def vencedor(self, oceano_jogador, oceano_computador):
         if self.todas_embarcacoes_afundadas(oceano_jogador):
-            print("Jogador venceu!")
+            print("Parabéns!!! Você venceu!")
+    
             return True
         elif self.todas_embarcacoes_afundadas(oceano_computador):
-            print("Jogador venceu!")
+            print("Você perdeu =(")
             return True
 
     
@@ -200,13 +201,11 @@ class ControladorJogo:
                 print(f"Posicione o {nome_embarcacao} (tamanho {tamanho_embarcacao})")
                 while True:
                     if self.posiciona_embarcacao(tamanho, oceano_jogador.matriz, embarcacao):
-
                         self.imprimir_tabuleiro(tamanho, oceano_jogador.matriz)
                         break
                 
-                print("embarcacao vai ser posicionada")
                 self.posiciona_embarcacao_computador(tamanho, oceano_computador.matriz, embarcacao)  
-        self.imprimir_tabuleiro(tamanho, oceano_computador.matriz)
+            
 
         continua = True
         while continua:
