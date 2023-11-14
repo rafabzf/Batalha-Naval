@@ -3,7 +3,7 @@ class TelaJogador:
         print("------CADASTRO------")
         nome = input("Digite seu nome: ")
         data_nascimento = input("Digite sua data de nascimento (DD/MM/AAAA): ")
-        senha = input("Digite sua data de senha: ")
+        senha = input("Digite a senha: ")
         return {"nome": nome, "data_nascimento": data_nascimento, "senha": senha}
     
     def seleciona_jogador(self):

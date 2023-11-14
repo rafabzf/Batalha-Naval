@@ -44,9 +44,12 @@ class ControladorSistema:
     def retorna_estah_cadastrado(self, recebe_nome, recebe_senha):
         return self.__controlador_jogador.estah_cadastrado(recebe_nome, recebe_senha)
     
-    
-    def retorna_armazena_tamanho_oceano(self):
-        return self.__controlador_oceano.cria_oceano_jogador()
+
+    def retorna_cria_oceano(self, tamanho):
+        return self.__controlador_oceano.cria_oceano(tamanho)
+
+    def retorna_recebe_tamanho_oceano(self):
+        return self.__controlador_oceano.recebe_tamanho_oceano()
 
 
     def inicializa_sistema(self):

@@ -8,8 +8,8 @@ class TelaJogo:
     def mostra_resultado_jogo(self):
         pass
 
-    def mostra_pontuacao_jogada(self):
-        pass
+    def mostra_resultado_rodada(self, jogador, resultado):
+        print(f"{jogador} {resultado} o tiro")
 
     def mostra_opcoes(self):
         print("------MENU JOGO------")

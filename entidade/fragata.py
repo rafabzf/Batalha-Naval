@@ -1,8 +1,8 @@
 from entidade.embarcacao import Embarcacao
 
 class Fragata(Embarcacao):
-    def __init__(self, tamanho: int, nome: str, posicoes: int, num_canhoes: int):
-        super().__init__(tamanho, nome, posicoes)
+    def __init__(self, num_canhoes: int):
+        super().__init__("Fragata", "F", 3, 2)
         self.__num_canhoes = num_canhoes
         
     @property
