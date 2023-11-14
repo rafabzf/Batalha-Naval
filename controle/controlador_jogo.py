@@ -54,8 +54,6 @@ class ControladorJogo:
             self.__controlador_sistema.encerra_sistema()
         
 
-
-
     def imprimir_tabuleiro(self, tamanho, oceano):
         letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"  # Usaremos letras para as colunas
         print("   " + " ".join(letras[:tamanho]))
@@ -153,17 +151,35 @@ class ControladorJogo:
                             oceano[linha][coluna] = sigla_embarcacao
                     return True
 
-    def fazer_tiro(self, tamanho_oceano, tabuleiro, oponente_tabuleiro):
+    def faz_tiro_jogador(self, tamanho_oceano, oceano_tiros_jogador, oceano_computador):
         linha, coluna = self.trata_coordenada(tamanho_oceano, "do tiro")
-        if oponente_tabuleiro[linha][coluna] != "~":
+        if oceano_tiros_jogador[linha][coluna] == "O" or oceano_tiros_jogador[linha][coluna] == "X":
+            self.__tela_jogo.mostra_mensagem("O tiro foi repetido!")
+            tiro_acertou = self.faz_tiro_jogador(tamanho_oceano, oceano_tiros_jogador, oceano_computador)
+        if oceano_computador[linha][coluna] != "~":
             tiro_acertou = True
-            oponente_tabuleiro[linha][coluna] = "X"
-            
+            self.__tela_jogo.mostra_resultado_rodada("Você", "acertou")
         else:
             tiro_acertou = False
-            oponente_tabuleiro[linha][coluna] = "O"
-        tabuleiro[linha][coluna] = "X" if tiro_acertou else "O"
+            self.__tela_jogo.mostra_resultado_rodada("Você", "não acertou")
+        oceano_tiros_jogador[linha][coluna] = "X" if tiro_acertou else "O"
         return tiro_acertou
+    
+    def faz_tiro_computador(self, tamanho, oceano_jogador, oceano_tiros_computador):
+        print("Turno do computador:")
+        while True:
+            linha, coluna = random.randint(0, tamanho-1), random.randint(0, tamanho-1)
+            if oceano_tiros_computador[linha][coluna] == "~":
+                if oceano_jogador[linha][coluna] != "~":
+                    self.__tela_jogo.mostra_resultado_rodada("O computador", "acertou")
+                    tiro_acertou = True
+                else:
+                    oceano_tiros_computador[linha][coluna] = "O"
+                    self.__tela_jogo.mostra_resultado_rodada("O computador", "errou")
+                    tiro_acertou = False
+                oceano_tiros_computador[linha][coluna] = "X" if tiro_acertou else "O"
+                break
+
 
     def todas_embarcacoes_afundadas(self, tabuleiro):
         atingidas = 0
@@ -176,20 +192,19 @@ class ControladorJogo:
     
     def vencedor(self, oceano_jogador, oceano_computador):
         if self.todas_embarcacoes_afundadas(oceano_jogador):
-            print("Parabéns!!! Você venceu!")
-    
+            print("O computador venceu")
             return True
         elif self.todas_embarcacoes_afundadas(oceano_computador):
-            print("Você perdeu =(")
+            print("Parabéns!!! Você venceu!")
             return True
+        return False
 
-    
-
-    def partida(self):       
+    def partida(self): 
         tamanho = self.__controlador_sistema.retorna_recebe_tamanho_oceano()
         oceano_jogador = self.__controlador_sistema.retorna_cria_oceano(tamanho)
         oceano_computador = self.__controlador_sistema.retorna_cria_oceano(tamanho)
-        oceano_oponente = self.__controlador_sistema.retorna_cria_oceano(tamanho)
+        oceano_tiros_jogador = self.__controlador_sistema.retorna_cria_oceano(tamanho)
+        oceano_tiros_computador = self.__controlador_sistema.retorna_cria_oceano(tamanho)
         self.imprimir_tabuleiro(tamanho, oceano_jogador.matriz)
 
         for embarcacao in oceano_jogador.embarcacoes:  
@@ -203,16 +218,11 @@ class ControladorJogo:
                     if self.posiciona_embarcacao(tamanho, oceano_jogador.matriz, embarcacao):
                         self.imprimir_tabuleiro(tamanho, oceano_jogador.matriz)
                         break
-                
                 self.posiciona_embarcacao_computador(tamanho, oceano_computador.matriz, embarcacao)  
-            
-
-        continua = True
-        while continua:
-            self.imprimir_tabuleiro(oceano_computador.matriz)
-            self.fazer_tiro(tamanho, oceano_oponente.matriz, oceano_computador.matriz)
-            self.imprimir_tabuleiro(tamanho, oceano_oponente.matriz)
-            if self.vencedor(oceano_jogador.matriz, oceano_computador.matriz):
-                continua = False
-            
-    
+        
+        while not self.vencedor(oceano_tiros_jogador.matriz, oceano_tiros_computador.matriz):
+            self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz)         
+            if self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz):
+                self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz)
+                self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz)
+            self.faz_tiro_computador(tamanho, oceano_jogador.matriz, oceano_tiros_computador.matriz)
