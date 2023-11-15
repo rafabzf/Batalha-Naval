@@ -12,4 +12,4 @@ class JogadorDAO(DAO):
         return super().get(nome)
     
     def remove(self, jogador):
-        return super().remove(jogador.nome)
+        super().remove(jogador.nome)
