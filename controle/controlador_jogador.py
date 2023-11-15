@@ -1,6 +1,7 @@
 from limite.tela_jogador import TelaJogador
 from entidade.jogador import Jogador
 from controle.controlador_excessao import ControladorExcessao
+from entidade.jogador_dao import JogadorDAO
 import datetime
 
 
@@ -9,7 +10,11 @@ class ControladorJogador:
         self.__controlador_sistema = controlador_sistema
         self.__tela_jogador = TelaJogador()
         self.__controlador_execessao = ControladorExcessao()
-        self.__jogadores = []
+        self.__jogador_dao = JogadorDAO()
+
+    @property
+    def jogadores(self):
+        return self.__jogador_dao.get_all()
 
     def cadastra_jogador(self):
         dados_jogador = self.__tela_jogador.recebe_cadastro()
@@ -21,21 +26,21 @@ class ControladorJogador:
             self.cadastra_jogador()
             return
 
-        for jogador in self.__jogadores:
+        for jogador in self.jogadores:
             if dados_jogador["nome"] == jogador.nome and data_nascimento == jogador.data_nascimento:
                 self.__tela_jogador.mostra_mensagem("Jogador já cadastrado!")
                 self.__controlador_sistema.abre_opcoes()
                 return
 
         jogador = Jogador(dados_jogador["nome"], data_nascimento, dados_jogador["senha"], pontuacao=0)
-        self.__jogadores.append(jogador)
+        self.__jogador_dao.add(jogador)
         self.__tela_jogador.mostra_mensagem("\nCadastro realizado com sucesso!")
         self.__tela_jogador.mostra_mensagem("Faça Login para jogar! \n")
         
     def pega_jogador_por_nome_e_senha(self, nome: str, senha: str):
-        for player in self.__jogadores:
-            if player.nome == nome and player.senha == senha:
-                return player
+        for jogador in self.jogadores:
+            if jogador.nome == nome and jogador.senha == senha:
+                return jogador
         return None
 
     def altera_cadastro(self):
@@ -47,7 +52,7 @@ class ControladorJogador:
         jogador = self.pega_jogador_por_nome_e_senha(dados["nome"], dados["senha"])
         
         if jogador is not None:
-            self.__jogadores.remove(jogador)
+            self.__jogador_dao.remove(jogador)
             self.__tela_jogador.mostra_mensagem("Jogador removido!")
             self.lista_jogadores()
             self.__controlador_sistema.abre_opcoes()
@@ -60,10 +65,10 @@ class ControladorJogador:
             jogador.pontuacao, jogador.nome))
 
     def lista_jogadores(self):
-        for jogador in self.__jogadores:
+        for jogador in self.jogadores:
             self.__tela_jogador.mostra_mensagem({"nome": jogador.nome})
 
     def estah_cadastrado(self, nome, senha):
-        for jogador in self.__jogadores:
+        for jogador in self.jogadores:
             if jogador.nome == nome and jogador.senha == senha:
                 return True
