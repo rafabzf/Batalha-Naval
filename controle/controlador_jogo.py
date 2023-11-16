@@ -26,17 +26,25 @@ class ControladorJogo:
                 self.faz_login()
 
     def inicia_jogo(self):
-        self.abre_opcoes()
+        self.abre_menu_jogo()
 
     def voltar(self):
         self.faz_login()
 
 
-    def abre_opcoes(self):
+    def abre_menu_jogo(self):
         lista_opcoes = {1: self.inicia_partida, 
                         2: self.mostra_ranking,
                         0: self.voltar}
         opcao_selecionada = self.__tela_jogo.mostra_opcoes()
+        funcao_escolhida = lista_opcoes[opcao_selecionada]
+        funcao_escolhida()
+    
+    def abre_menu_final(self):
+        lista_opcoes = {1: self.abre_menu_jogo,
+                        2: self.mostra_estatisticas,
+                        0: self.__controlador_sistema.encerra_sistema}
+        opcao_selecionada = self.__tela_jogo.mostra_menu_final()
         funcao_escolhida = lista_opcoes[opcao_selecionada]
         funcao_escolhida()
 
@@ -227,3 +235,6 @@ class ControladorJogo:
                 self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz)
                 self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz)
             self.faz_tiro_computador(tamanho, oceano_jogador.matriz, oceano_tiros_computador.matriz)
+
+    def mostra_estatisticas(self):
+        pass

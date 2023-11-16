@@ -17,9 +17,18 @@ class TelaJogo:
         print("1 - Iniciar partida")
         print("2 - Ver ranking")
         print("0 - Voltar")
+        print("---------------------")
         opcao = int(input("Escolha a opção: "))
         return opcao
 
+    def mostra_menu_final(self):
+        print("-------------")
+        print("1 - Voltar para o Menu Jogo")
+        print("2 - Ver estatísticas")
+        print("0 - Encerrar Sistema")
+        print("-------------")
+        opcao = int(input("Escolha a opção desejada"))
+        return opcao
 
     def mostra_mensagem(self, msg):
         print(msg)
