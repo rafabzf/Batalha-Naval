@@ -1,6 +1,6 @@
 class TelaSistema:
     def mostra_opcoes(self):
-        print("------Batalha Naval------")
+        print("------MENU INICIAL------")
         print("Selecione a opção desejada")
         print("1 - Fazer Login")
         print("2 - Fazer Cadastro")

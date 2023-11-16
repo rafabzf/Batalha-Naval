@@ -25,5 +25,5 @@ class TelaJogo:
         print(msg)
 
     def voltar(self):
-        opcao = input("Deseja voltar? [S/N]").upper()
+        opcao = input("Deseja voltar para o meu inicial? [S/N] ").upper()
         return opcao
