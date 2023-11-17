@@ -107,7 +107,7 @@ class ControladorJogo:
         
 
     def posiciona_embarcacao(self, tamanho_oceano, oceano, embarcacao):
-        tamanho_embarcacao = embarcacao.tamanho
+        tamanho_embarcacao = embarcacao.vida
         sigla_embarcacao = embarcacao.sigla
         while True:
             linha_inicial, coluna_inicial = self.trata_coordenada(tamanho_oceano, msg="inicial")
@@ -129,7 +129,7 @@ class ControladorJogo:
             print("Posição inválida. Tente novamente.")
 
     def posiciona_embarcacao_computador(self, tamanho_oceano, oceano, embarcacao):
-        tamanho_embarcacao = embarcacao.tamanho
+        tamanho_embarcacao = embarcacao.vida
         sigla_embarcacao = embarcacao.sigla
 
         while True:
@@ -167,6 +167,7 @@ class ControladorJogo:
         if oceano_computador[linha][coluna] != "~":
             tiro_acertou = True
             self.__tela_jogo.mostra_resultado_rodada("Você", "acertou")
+            self.__pontuacao_partida_jogador += 1
         else:
             tiro_acertou = False
             self.__tela_jogo.mostra_resultado_rodada("Você", "não acertou")
@@ -181,6 +182,7 @@ class ControladorJogo:
                 if oceano_jogador[linha][coluna] != "~":
                     self.__tela_jogo.mostra_resultado_rodada("O computador", "acertou")
                     tiro_acertou = True
+                    self.__pontuacao_partida_jogador += 1
                 else:
                     oceano_tiros_computador[linha][coluna] = "O"
                     self.__tela_jogo.mostra_resultado_rodada("O computador", "errou")
@@ -200,7 +202,7 @@ class ControladorJogo:
     
     def vencedor(self, oceano_jogador, oceano_computador):
         if self.todas_embarcacoes_afundadas(oceano_computador):
-            print("O computador venceu")
+            print("O computador venceu!")
             return True
         elif self.todas_embarcacoes_afundadas(oceano_jogador):
             print("Parabéns!!! Você venceu!")
@@ -219,7 +221,7 @@ class ControladorJogo:
             quantidade = embarcacao.quantidade
             for restante in range(quantidade, 0, -1):
                 nome_embarcacao = embarcacao.nome
-                tamanho_embarcacao = embarcacao.tamanho
+                tamanho_embarcacao = embarcacao.vida
                 print(f"Quantidade de {nome_embarcacao} para serem posicionados: {restante}")
                 print(f"Posicione o {nome_embarcacao} (tamanho {tamanho_embarcacao})")
                 while True:
@@ -235,6 +237,7 @@ class ControladorJogo:
                 self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz)
                 self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz)
             self.faz_tiro_computador(tamanho, oceano_jogador.matriz, oceano_tiros_computador.matriz)
+            
 
     def mostra_estatisticas(self):
         pass
