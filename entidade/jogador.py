@@ -39,3 +39,6 @@ class Jogador:
     @pontuacao.setter
     def pontuacao(self, pontuacao):
         self.__pontuacao = pontuacao
+
+    def adiciona_pontucao(self, pontos):
+        self.__pontuacao += pontos
