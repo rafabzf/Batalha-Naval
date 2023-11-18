@@ -21,14 +21,14 @@ class TelaJogo:
         opcao = int(input("Escolha a opção: "))
         return opcao
 
-    def mostra_menu_final(self):
-        print("-------------")
-        print("1 - Voltar para o Menu Jogo")
-        print("2 - Ver estatísticas")
-        print("0 - Encerrar Sistema")
-        print("-------------")
-        opcao = int(input("Escolha a opção desejada"))
-        return opcao
+    def mostra_resultados(self, duracao, vencedor, pontuacao_jogador, pontuacao_computador):
+        print("------RESULTADOS------")
+        print(f"Duração da partida: {duracao}")
+        print(f"O vencedor da partida foi o: {vencedor}")
+        print(f"Pontuação do jogador: {pontuacao_jogador}")
+        print(f"Pontuação do computador: {pontuacao_computador}")
+        print("---------------------")
+        
 
     def mostra_mensagem(self, msg):
         print(msg)

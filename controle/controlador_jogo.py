@@ -1,4 +1,5 @@
-#from entidade.jogo import Jogo
+from datetime import datetime
+from entidade.jogo import Jogo
 from limite.tela_jogo import TelaJogo
 import random
 from controle.controlador_oceano import ControladorOceano
@@ -10,6 +11,10 @@ class ControladorJogo:
         self.__controlador_oceano = ControladorOceano
         self.__pontuacao_partida_jogador = 0
         self.__pontuacao_partida_computador = 0
+        self.__hora_inicio = None
+        self.__hora_fim = None
+        self.__vencedor = None
+        self.__jogos = []
 
 
     def faz_login(self):
@@ -48,7 +53,15 @@ class ControladorJogo:
         funcao_escolhida = lista_opcoes[opcao_selecionada]
         funcao_escolhida()
 
+
+    def mostrar_data(self):
+        data_atual = datetime.now()
+        data_formatada = data_atual.strftime("%d/%m/%Y %H:%M:%S")
+        return data_formatada
+
     def inicia_partida(self):
+        print("teste")
+        self.__hora_inicio = datetime.now().replace(microsecond=0)
         self.__tela_jogo.mostra_mensagem("Partida iniciada!")
         self.partida()
         #self.__controlador_sistema.retorna_armazena_tamanho_oceano()
@@ -182,7 +195,7 @@ class ControladorJogo:
                 if oceano_jogador[linha][coluna] != "~":
                     self.__tela_jogo.mostra_resultado_rodada("O computador", "acertou")
                     tiro_acertou = True
-                    self.__pontuacao_partida_jogador += 1
+                    self.__pontuacao_partida_computador += 1
                 else:
                     oceano_tiros_computador[linha][coluna] = "O"
                     self.__tela_jogo.mostra_resultado_rodada("O computador", "errou")
@@ -200,14 +213,19 @@ class ControladorJogo:
         if atingidas ==  17:
             return True
     
-    def vencedor(self, oceano_jogador, oceano_computador):
-        if self.todas_embarcacoes_afundadas(oceano_computador):
-            print("O computador venceu!")
-            return True
-        elif self.todas_embarcacoes_afundadas(oceano_jogador):
-            print("Parabéns!!! Você venceu!")
+    def vencedor_computador(self, oceano_tiros_computador):
+        if self.todas_embarcacoes_afundadas(oceano_tiros_computador):
+            self.__vencedor = "computador"
             return True
         return False
+
+    def vencedor_jogador(self, oceano_tiros_jogador):
+        if self.todas_embarcacoes_afundadas(oceano_tiros_jogador):
+            self.__vencedor = "jogador"
+            return True
+        return False
+    
+    
 
     def partida(self): 
         tamanho = self.__controlador_sistema.retorna_recebe_tamanho_oceano()
@@ -229,15 +247,23 @@ class ControladorJogo:
                         self.imprimir_tabuleiro(tamanho, oceano_jogador.matriz)
                         break
                 self.posiciona_embarcacao_computador(tamanho, oceano_computador.matriz, embarcacao)  
-        
-        while not self.vencedor(oceano_tiros_jogador.matriz, oceano_tiros_computador.matriz):
-            self.imprimir_tabuleiro(tamanho, oceano_computador.matriz)
-            self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz)         
-            if self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz):
+
+        while not (self.vencedor_jogador(oceano_tiros_jogador.matriz) or self.vencedor_computador(oceano_tiros_computador.matriz)):  
+            self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz) 
+            self.imprimir_tabuleiro(tamanho, oceano_computador.matriz) 
+            while self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz):
                 self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz)
                 self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz)
-            self.faz_tiro_computador(tamanho, oceano_jogador.matriz, oceano_tiros_computador.matriz)
-            
+            while self.faz_tiro_computador(tamanho, oceano_jogador.matriz, oceano_tiros_computador.matriz):
+                self.faz_tiro_computador(tamanho, oceano_jogador.matriz, oceano_tiros_computador.matriz)
+        self.termina_jogo()
 
-    def mostra_estatisticas(self):
-        pass
+    def termina_jogo(self):
+        vencedor = self.__vencedor
+        self.__hora_fim = datetime.now().replace(microsecond=0)
+        duracao = self.__hora_fim - self.__hora_inicio
+        data = self.mostrar_data()
+        jogo = Jogo(data, duracao, vencedor, self.__pontuacao_partida_jogador)
+        self.__jogos.append(jogo)
+        self.__tela_jogo.mostra_resultados(duracao, vencedor, self.__pontuacao_partida_jogador,
+                                            self.__pontuacao_partida_computador)
