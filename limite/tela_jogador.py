@@ -36,7 +36,6 @@ import PySimpleGUI as sg
 class TelaJogador:
     def __init__(self):
         sg.theme('DarkBlue')
-        self.layout = []
 
     def recebe_cadastro(self):
         layout = [
@@ -49,16 +48,14 @@ class TelaJogador:
 
         window = sg.Window('Cadastro', layout)
 
-        while True:
-            event, values = window.read()
-            if event == sg.WIN_CLOSED:
-                break
-            if event == 'Cadastrar':
-                nome = values['-NOME-']
-                nascimento = values['-NASCIMENTO-']
-                senha = values['-SENHA-']
-                window.close()
-                return {"nome": nome, "data_nascimento": nascimento, "senha": senha}
+        event, values = window.read(close=True)
+        if event == sg.WIN_CLOSED:
+            return None
+
+        nome = values['-NOME-']
+        nascimento = values['-NASCIMENTO-']
+        senha = values['-SENHA-']
+        return {"nome": nome, "data_nascimento": nascimento, "senha": senha}
 
     def seleciona_jogador(self):
         layout = [
@@ -69,15 +66,13 @@ class TelaJogador:
 
         window = sg.Window('Selecionar Jogador', layout)
 
-        while True:
-            event, values = window.read()
-            if event == sg.WIN_CLOSED:
-                break
-            if event == 'Selecionar':
-                nome = values['-NOME-']
-                senha = values['-SENHA-']
-                window.close()
-                return {"nome": nome, "senha": senha}
+        event, values = window.read(close=True)
+        if event == sg.WIN_CLOSED:
+            return None
+
+        nome = values['-NOME-']
+        senha = values['-SENHA-']
+        return {"nome": nome, "senha": senha}
 
     def pega_dados_jogador(self):
         layout = [
@@ -90,16 +85,14 @@ class TelaJogador:
 
         window = sg.Window('Inserir Dados', layout)
 
-        while True:
-            event, values = window.read()
-            if event == sg.WIN_CLOSED:
-                break
-            if event == 'Inserir':
-                nome = values['-NOME-']
-                nascimento = values['-NASCIMENTO-']
-                senha = values['-SENHA-']
-                window.close()
-                return {"nome": nome, "nascimento" : nascimento, "senha": senha}
+        event, values = window.read(close=True)
+        if event == sg.WIN_CLOSED:
+            return None
+
+        nome = values['-NOME-']
+        nascimento = values['-NASCIMENTO-']
+        senha = values['-SENHA-']
+        return {"nome": nome, "nascimento" : nascimento, "senha": senha}
 
     def mostra_historico(self, historico):
         layout = [
@@ -111,7 +104,7 @@ class TelaJogador:
         window = sg.Window('Histórico de Partidas', layout)
 
         while True:
-            event, values = window.read()
+            event, _ = window.read(close=True)
             if event == sg.WIN_CLOSED or event == 'Fechar':
                 break
 
@@ -125,7 +118,7 @@ class TelaJogador:
         window = sg.Window('Pontuação', layout)
 
         while True:
-            event, values = window.read()
+            event, _ = window.read(close=True)
             if event == sg.WIN_CLOSED or event == 'Fechar':
                 break
 
@@ -139,7 +132,7 @@ class TelaJogador:
         window = sg.Window('Lista de Jogadores', layout)
 
         while True:
-            event, values = window.read()
+            event, _ = window.read(close=True)
             if event == sg.WIN_CLOSED or event == 'Fechar':
                 break
 
