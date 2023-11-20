@@ -32,8 +32,9 @@ class ControladorSistema:
     def inicia_login(self):
         self.__controlador_jogo.faz_login()
 
-    def retorna_lista_jogadores(self):
-        return self.__controlador_jogador.lista_jogadores()
+    def retorna_ordena_ranking(self):         
+        return self.__controlador_jogador.ordena_ranking()
+ 
     
     
     def retorna_estah_cadastrado(self, recebe_nome, recebe_senha):
