@@ -1,5 +1,5 @@
 class Jogo:
-    def __init__(self, data, duracao, vencedor, pontucao_partida):
+    def __init__(self, data, duracao, vencedor, pontucao_partida, jogadas):
         self.__data = data
         self.__duracao = duracao
         self.__vencedor = vencedor
@@ -36,3 +36,11 @@ class Jogo:
     @pontuacao_partida.setter
     def pontuacao_partida(self, pontuacao_partida):
         self.__pontuacao_partida = pontuacao_partida
+
+    @property
+    def jogadas(self):
+        return self.__jogadas
+
+    @jogadas.setter
+    def jogadas(self, jogadas):
+        self.__jogadas = jogadas
