@@ -292,7 +292,5 @@ class ControladorJogo:
         self.__jogos.append(jogo)   
         self.__tela_jogo.mostra_resultados(duracao, vencedor, self.__pontuacao_partida_jogador,
                                             self.__pontuacao_partida_computador)
-        for jogada in self.__jogadas:
-            print(jogada)
         self.abre_menu_final()
 
