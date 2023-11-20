@@ -2,11 +2,13 @@
 from entidade.jogo import Jogo
 
 class Jogador:
-    def __init__(self, nome:str, data_nascimento, senha, pontuacao):
+    def __init__(self, nome:str, data_nascimento, senha, jogos, pontuacao):
         self.__nome = nome
         self.__data_nascimento = data_nascimento
         self.__senha = senha
+        self.__jogos = jogos   
         self.__pontuacao = pontuacao
+
 
     @property
     def nome(self):
@@ -39,6 +41,14 @@ class Jogador:
     @pontuacao.setter
     def pontuacao(self, pontuacao):
         self.__pontuacao = pontuacao
+    
+    @property
+    def jogos(self):
+        return self.__jogos
+
+    @jogos.setter
+    def jogos(self, jogos):
+        self.__jogos = jogos
 
     def adiciona_pontucao(self, pontos):
         self.__pontuacao += pontos
