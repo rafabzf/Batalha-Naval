@@ -3,18 +3,21 @@ from entidade.jogo import Jogo
 from limite.tela_jogo import TelaJogo
 import random
 from controle.controlador_oceano import ControladorOceano
+from controle.controlador_excessao import ControladorExcessao
 
 class ControladorJogo:
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
         self.__tela_jogo = TelaJogo()
         self.__controlador_oceano = ControladorOceano
+        self.__controlador_excessao = ControladorExcessao()
         self.__pontuacao_partida_jogador = 0
         self.__pontuacao_partida_computador = 0
         self.__hora_inicio = None
         self.__hora_fim = None
         self.__vencedor = None
         self.__jogos = []
+        self.__jogadas = []
 
 
     def faz_login(self):
@@ -38,20 +41,31 @@ class ControladorJogo:
 
 
     def abre_menu_jogo(self):
-        lista_opcoes = {1: self.inicia_partida, 
-                        2: self.mostra_ranking,
-                        0: self.voltar}
-        opcao_selecionada = self.__tela_jogo.mostra_opcoes()
-        funcao_escolhida = lista_opcoes[opcao_selecionada]
-        funcao_escolhida()
+        try:
+            lista_opcoes = {1: self.inicia_partida, 
+                            2: self.mostra_ranking,
+                            0: self.voltar}
+            opcao_selecionada = self.__tela_jogo.mostra_opcoes()
+            funcao_escolhida = lista_opcoes[opcao_selecionada]
+            funcao_escolhida()
+        except Exception as e:
+            mensagem = "Digite um número entre 0-2, coforme a opção desejada"
+            self.__controlador_excessao.handle_value_error(e, mensagem)
+            self.abre_menu_jogo()
     
     def abre_menu_final(self):
-        lista_opcoes = {1: self.abre_menu_jogo,
-                        2: self.mostra_estatisticas,
-                        0: self.__controlador_sistema.encerra_sistema}
-        opcao_selecionada = self.__tela_jogo.mostra_menu_final()
-        funcao_escolhida = lista_opcoes[opcao_selecionada]
-        funcao_escolhida()
+        try:
+            lista_opcoes = {1: self.inicia_partida,
+                            2: self.abre_menu_jogo,
+                            0: self.__controlador_sistema.encerra_sistema}
+            opcao_selecionada = self.__tela_jogo.mostra_opcoes_final()
+            funcao_escolhida = lista_opcoes[opcao_selecionada]
+            funcao_escolhida()
+        except Exception as e:
+            mensagem = "Digite um número entre 0-2, coforme a opção desejada"
+            self.__controlador_excessao.handle_value_error(e, mensagem)
+            self.abre_menu_final()
+
 
 
     def mostrar_data(self):
@@ -60,14 +74,13 @@ class ControladorJogo:
         return data_formatada
 
     def inicia_partida(self):
-        print("teste")
         self.__hora_inicio = datetime.now().replace(microsecond=0)
         self.__tela_jogo.mostra_mensagem("Partida iniciada!")
         self.partida()
         #self.__controlador_sistema.retorna_armazena_tamanho_oceano()
 
     def mostra_ranking(self):
-        self.__controlador_sistema.retorna_lista_jogadores()
+        self.__controlador_sistema.retorna_ordena_ranking()
 
         if self.__tela_jogo.voltar() == "S":
             self.abre_opcoes()
@@ -174,9 +187,11 @@ class ControladorJogo:
 
     def faz_tiro_jogador(self, tamanho_oceano, oceano_tiros_jogador, oceano_computador):
         linha, coluna = self.trata_coordenada(tamanho_oceano, "do tiro")
+
         if oceano_tiros_jogador[linha][coluna] == "O" or oceano_tiros_jogador[linha][coluna] == "X":
             self.__tela_jogo.mostra_mensagem("O tiro foi repetido!")
-            tiro_acertou = self.faz_tiro_jogador(tamanho_oceano, oceano_tiros_jogador, oceano_computador)
+            return False  # Retorna False para indicar que o tiro foi repetido e não afeta a pontuação
+
         if oceano_computador[linha][coluna] != "~":
             tiro_acertou = True
             self.__tela_jogo.mostra_resultado_rodada("Você", "acertou")
@@ -184,7 +199,13 @@ class ControladorJogo:
         else:
             tiro_acertou = False
             self.__tela_jogo.mostra_resultado_rodada("Você", "não acertou")
+
         oceano_tiros_jogador[linha][coluna] = "X" if tiro_acertou else "O"
+
+        coluna = self.mapear_letra_numero(coluna)
+        linha = str(linha)
+        self.__jogadas.append((linha + coluna, "acertou" if tiro_acertou else "errou"))
+
         return tiro_acertou
     
     def faz_tiro_computador(self, tamanho, oceano_jogador, oceano_tiros_computador):
@@ -201,6 +222,8 @@ class ControladorJogo:
                     self.__tela_jogo.mostra_resultado_rodada("O computador", "errou")
                     tiro_acertou = False
                 oceano_tiros_computador[linha][coluna] = "X" if tiro_acertou else "O"
+                if tiro_acertou == True:
+                    self.__pontuacao_partida_computador += 1
                 break
 
 
@@ -248,12 +271,14 @@ class ControladorJogo:
                         break
                 self.posiciona_embarcacao_computador(tamanho, oceano_computador.matriz, embarcacao)  
 
-        while not (self.vencedor_jogador(oceano_tiros_jogador.matriz) or self.vencedor_computador(oceano_tiros_computador.matriz)):  
+        while not (self.vencedor_jogador(oceano_tiros_jogador.matriz) or \
+                   self.vencedor_computador(oceano_tiros_computador.matriz)):  
             self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz) 
             self.imprimir_tabuleiro(tamanho, oceano_computador.matriz) 
             while self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz):
+                if self.vencedor_jogador(oceano_tiros_jogador.matriz):
+                    break
                 self.imprimir_tabuleiro(tamanho, oceano_tiros_jogador.matriz)
-                self.faz_tiro_jogador(tamanho, oceano_tiros_jogador.matriz, oceano_computador.matriz)
             while self.faz_tiro_computador(tamanho, oceano_jogador.matriz, oceano_tiros_computador.matriz):
                 self.faz_tiro_computador(tamanho, oceano_jogador.matriz, oceano_tiros_computador.matriz)
         self.termina_jogo()
@@ -263,7 +288,11 @@ class ControladorJogo:
         self.__hora_fim = datetime.now().replace(microsecond=0)
         duracao = self.__hora_fim - self.__hora_inicio
         data = self.mostrar_data()
-        jogo = Jogo(data, duracao, vencedor, self.__pontuacao_partida_jogador)
-        self.__jogos.append(jogo)
+        jogo = Jogo(data, duracao, vencedor, self.__pontuacao_partida_jogador, self.__jogadas)
+        self.__jogos.append(jogo)   
         self.__tela_jogo.mostra_resultados(duracao, vencedor, self.__pontuacao_partida_jogador,
                                             self.__pontuacao_partida_computador)
+        for jogada in self.__jogadas:
+            print(jogada)
+        self.abre_menu_final()
+
