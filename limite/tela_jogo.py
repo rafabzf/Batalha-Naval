@@ -28,7 +28,16 @@ class TelaJogo:
         print(f"Pontuação do jogador: {pontuacao_jogador}")
         print(f"Pontuação do computador: {pontuacao_computador}")
         print("---------------------")
-        
+    
+    def mostra_opcoes_final(self):
+        print("------------------------------")
+        print("Selecione a sua opção final:")
+        print("1 - Iniciar um novo jogo")
+        print("2 - Voltar para o Menu Jogo")
+        print("0 - Encerrar o sistema")
+        print("------------------------------")
+        opcao = int(input("Escolhe a opção: "))
+        return opcao
 
     def mostra_mensagem(self, msg):
         print(msg)
