@@ -46,7 +46,7 @@ class ControladorJogador:
                 self.__controlador_sistema.abre_opcoes()
                 return
 
-        jogador = Jogador(dados_jogador["nome"], data_nascimento, dados_jogador["senha"], pontuacao=0)
+        jogador = Jogador(dados_jogador["nome"], data_nascimento, dados_jogador["senha"], jogos=[],pontuacao=0)
         self.__jogador_dao.add(jogador)
         self.__tela_jogador.mostra_mensagem("\nCadastro realizado com sucesso!")
         self.__tela_jogador.mostra_mensagem("Faça Login para jogar! \n")
@@ -104,12 +104,15 @@ class ControladorJogador:
             self.__controlador_sistema.abre_opcoes()
 
     def ordena_ranking(self):
-        self.lista_jogadores.sort(key=lambda jogador: (
-            jogador.pontuacao, jogador.nome))
+        jogadores = self.jogadores
+        jogadores_ordenados = sorted(jogadores, key=lambda jogador: jogador.pontuacao)
+        print("Nome Pontuação")
+        for jogador in jogadores_ordenados:
+            print(f"{jogador.nome}: {jogador.pontuacao}")
 
     def lista_jogadores(self):
         for jogador in self.jogadores:
-            self.__tela_jogador.mostra_mensagem({"nome": jogador.nome})
+            self.__tela_jogador.mostra_mensagem(f"nome: {jogador.nome}")
 
     def estah_cadastrado(self, nome, senha):
         for jogador in self.jogadores:
